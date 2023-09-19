@@ -5,10 +5,15 @@ import com.sbs.db.domain.member.entity.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +25,8 @@ public class Question extends BaseEntity {
     private String subject;
     @Column(columnDefinition = "TEXT")
     private String content;
+    @Builder.Default
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
 }
+
