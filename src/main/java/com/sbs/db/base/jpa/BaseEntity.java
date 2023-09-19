@@ -4,6 +4,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,6 +18,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
