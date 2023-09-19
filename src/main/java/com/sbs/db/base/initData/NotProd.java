@@ -15,6 +15,7 @@ public class NotProd {
     public ApplicationRunner initData(QuestionService questionService) {
         return args -> {
             questionService.write("제목1", "내용1");
+            questionService.write("제목2", "내용2");
         };
     }
 }
