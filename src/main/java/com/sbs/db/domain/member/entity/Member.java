@@ -1,10 +1,8 @@
-package com.sbs.db.domain.question.entity;
+package com.sbs.db.domain.member.entity;
 
 import com.sbs.db.base.jpa.BaseEntity;
-import com.sbs.db.domain.member.entity.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +12,9 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Question extends BaseEntity {
-    @ManyToOne
-    private Member author;
-    private String subject;
-    @Column(columnDefinition = "TEXT")
-    private String content;
+public class Member extends BaseEntity {
+    @Column(unique = true)
+    private String username;
+    private String password;
 }
+
