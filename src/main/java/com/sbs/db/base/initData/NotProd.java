@@ -52,6 +52,8 @@ public class NotProd {
 
     @Transactional
     public void work2() {
-
+        Question question1 = questionService.findById(1L).get();
+        Answer answer1 = question1.getAnswers().get(0);
+        answer1.setContent("수정된 내용");
     }
 }

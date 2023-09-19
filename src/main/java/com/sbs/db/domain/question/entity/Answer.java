@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -20,5 +21,6 @@ public class Answer extends BaseEntity {
     @ManyToOne
     private Question question;
     @Column(columnDefinition = "TEXT")
+    @Setter
     private String content;
 }
