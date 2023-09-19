@@ -15,6 +15,8 @@ import lombok.experimental.SuperBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Getter
 @SuperBuilder
@@ -26,7 +28,7 @@ public class Question extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     @Builder.Default
-    @OneToMany(mappedBy = "question", cascade = {jakarta.persistence.CascadeType.PERSIST})
+    @OneToMany(mappedBy = "question", cascade = {PERSIST, REMOVE})
     private List<Answer> answers = new ArrayList<>();
 
     public void writeAnswer(Member author, String content) {

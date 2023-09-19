@@ -14,7 +14,6 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class QuestionService {
     private final QuestionRepository questionRepository;
-    private final AnswerService answerService;
 
     @Transactional
     public Question write(Member author, String subject, String content) {
@@ -33,10 +32,6 @@ public class QuestionService {
     }
 
     public void remove(Question question) {
-        question.getAnswers().forEach(answer -> {
-            answerService.remove(answer);
-        });
-
         questionRepository.delete(question);
     }
 }

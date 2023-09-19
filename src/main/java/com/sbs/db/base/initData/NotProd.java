@@ -3,7 +3,6 @@ package com.sbs.db.base.initData;
 import com.sbs.db.domain.member.entity.Member;
 import com.sbs.db.domain.member.service.MemberService;
 import com.sbs.db.domain.question.entity.Question;
-import com.sbs.db.domain.question.service.AnswerService;
 import com.sbs.db.domain.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class NotProd {
     private NotProd self;
     private final MemberService memberService;
     private final QuestionService questionService;
-    private final AnswerService answerService;
 
     @Bean
     public ApplicationRunner initData() {
