@@ -2,7 +2,6 @@ package com.sbs.db.base.initData;
 
 import com.sbs.db.domain.member.entity.Member;
 import com.sbs.db.domain.member.service.MemberService;
-import com.sbs.db.domain.question.entity.Answer;
 import com.sbs.db.domain.question.entity.Question;
 import com.sbs.db.domain.question.service.AnswerService;
 import com.sbs.db.domain.question.service.QuestionService;
@@ -45,17 +44,16 @@ public class NotProd {
         Question question3 = questionService.write(member2, "제목3", "내용3");
         Question question4 = questionService.write(member2, "제목4", "내용4");
 
-        Answer answer1 = answerService.write(member2, question1, "맞아요.");
-        Answer answer2 = answerService.write(member2, question2, "그런거 같아요.");
-        Answer answer3 = answerService.write(member1, question3, "ㅋㅋㅋ");
+        question1.writeAnswer(member2, "맞아요.");
+        question2.writeAnswer(member2, "그런거 같아요.");
+        question3.writeAnswer(member1, "ㅋㅋㅋ");
+
+        questionService.remove(question3);
+        questionService.remove(question4);
     }
 
     @Transactional
     public void work2() {
-        Question question3 = questionService.findById(3L).get();
-        Question question4 = questionService.findById(4L).get();
 
-        questionService.remove(question3);
-        questionService.remove(question4);
     }
 }

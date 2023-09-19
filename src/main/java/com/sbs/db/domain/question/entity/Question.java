@@ -26,7 +26,18 @@ public class Question extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     @Builder.Default
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = {jakarta.persistence.CascadeType.PERSIST})
     private List<Answer> answers = new ArrayList<>();
+
+    public void writeAnswer(Member author, String content) {
+        Answer answer = Answer
+                .builder()
+                .author(author)
+                .question(this)
+                .content(content)
+                .build();
+
+        answers.add(answer);
+    }
 }
 
