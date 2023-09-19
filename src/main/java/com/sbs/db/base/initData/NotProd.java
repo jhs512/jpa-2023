@@ -40,6 +40,9 @@ public class NotProd {
                 Answer answer1 = answerService.write(member2, question1, "맞아요.");
                 Answer answer2 = answerService.write(member2, question2, "그런거 같아요.");
                 Answer answer3 = answerService.write(member1, question3, "ㅋㅋㅋ");
+
+                questionService.remove(question3);
+                questionService.remove(question4);
             }
         };
     }

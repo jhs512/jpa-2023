@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,13 @@ public class AnswerService {
 
     public Optional<Answer> findById(long id) {
         return answerRepository.findById(id);
+    }
+
+    public List<Answer> findByQuestion(Question question) {
+        return answerRepository.findByQuestion(question);
+    }
+
+    public void remove(Answer answer) {
+        answerRepository.delete(answer);
     }
 }
