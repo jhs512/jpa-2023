@@ -28,10 +28,10 @@ public class Question extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     @Builder.Default
-    @OneToMany(mappedBy = "question", cascade = {PERSIST, REMOVE})
+    @OneToMany(mappedBy = "question", cascade = {PERSIST, REMOVE}, orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
 
-    public void writeAnswer(Member author, String content) {
+    public Answer writeAnswer(Member author, String content) {
         Answer answer = Answer
                 .builder()
                 .author(author)
@@ -40,6 +40,12 @@ public class Question extends BaseEntity {
                 .build();
 
         answers.add(answer);
+
+        return answer;
+    }
+
+    public void removeAnswer(Answer answer) {
+        answers.remove(answer);
     }
 }
 

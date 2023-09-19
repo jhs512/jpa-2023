@@ -2,6 +2,7 @@ package com.sbs.db.base.initData;
 
 import com.sbs.db.domain.member.entity.Member;
 import com.sbs.db.domain.member.service.MemberService;
+import com.sbs.db.domain.question.entity.Answer;
 import com.sbs.db.domain.question.entity.Question;
 import com.sbs.db.domain.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -42,12 +43,11 @@ public class NotProd {
         Question question3 = questionService.write(member2, "제목3", "내용3");
         Question question4 = questionService.write(member2, "제목4", "내용4");
 
-        question1.writeAnswer(member2, "맞아요.");
-        question2.writeAnswer(member2, "그런거 같아요.");
-        question3.writeAnswer(member1, "ㅋㅋㅋ");
+        Answer answer1 = question1.writeAnswer(member2, "맞아요.");
+        Answer answer2 = question1.writeAnswer(member2, "그런거 같아요.");
+        Answer answer3 = question1.writeAnswer(member2, "ㅋㅋㅋ");
 
-        questionService.remove(question3);
-        questionService.remove(question4);
+        question1.removeAnswer(answer2);
     }
 
     @Transactional
