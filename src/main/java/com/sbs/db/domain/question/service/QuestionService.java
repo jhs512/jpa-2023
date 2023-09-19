@@ -8,21 +8,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    @Transactional
     public Question write(String subject, String content) {
-        Question question1 = Question
+        Question question = Question
                 .builder()
                 .subject(subject)
                 .content(content)
                 .build();
 
-        questionRepository.save(question1);
+        write2(subject, content);
 
-        if (true) throw new RuntimeException();
+        return questionRepository.save(question);
+    }
+
+    @Transactional
+    private Question write2(String subject, String content) {
+        Question question = Question
+                .builder()
+                .subject(subject)
+                .content(content)
+                .build();
 
         Question question2 = Question
                 .builder()
@@ -30,6 +37,8 @@ public class QuestionService {
                 .content(content)
                 .build();
 
-        return questionRepository.save(question2);
+        questionRepository.save(question2);
+
+        return questionRepository.save(question);
     }
 }
