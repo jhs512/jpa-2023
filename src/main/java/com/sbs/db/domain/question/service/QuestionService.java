@@ -1,6 +1,7 @@
 package com.sbs.db.domain.question.service;
 
 import com.sbs.db.domain.member.entity.Member;
+import com.sbs.db.domain.question.entity.Board;
 import com.sbs.db.domain.question.entity.Question;
 import com.sbs.db.domain.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,10 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
 
     @Transactional
-    public Question write(Member author, String subject, String content) {
+    public Question write(Board board, Member author, String subject, String content) {
         Question question = Question
                 .builder()
+                .board(board)
                 .author(author)
                 .subject(subject)
                 .content(content)
@@ -38,5 +40,9 @@ public class QuestionService {
 
     public List<Question> findAll() {
         return questionRepository.findByOrderByIdDesc();
+    }
+
+    public void search(long boardId, String kw) {
+        questionRepository.findAllByKeyword(boardId, kw, null);
     }
 }

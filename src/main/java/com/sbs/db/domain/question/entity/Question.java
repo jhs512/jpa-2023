@@ -29,6 +29,8 @@ public class Question extends BaseEntity {
     @OneToMany(mappedBy = "question", cascade = {PERSIST, REMOVE}, orphanRemoval = true)
     @OrderBy("id DESC")
     private List<Answer> answers = new LinkedList<>();
+    @ManyToOne(fetch = LAZY)
+    private Board board;
 
     public Answer writeAnswer(Member author, String content) {
         Answer answer = Answer

@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +23,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    @Getter
     private Long id;
     @CreatedDate
     private LocalDateTime createDate;

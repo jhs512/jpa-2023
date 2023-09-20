@@ -24,4 +24,10 @@ class DbApplicationTests {
 			int size = question.getAnswers().size();
 		}
 	}
+
+	@Test
+	@Transactional
+	void t2() {
+		questionService.search(1, "하하");
+	}
 }
