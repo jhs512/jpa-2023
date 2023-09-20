@@ -2,20 +2,18 @@ package com.sbs.db.domain.question.entity;
 
 import com.sbs.db.base.jpa.BaseEntity;
 import com.sbs.db.domain.member.entity.Member;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -30,7 +28,8 @@ public class Question extends BaseEntity {
     private String content;
     @Builder.Default
     @OneToMany(mappedBy = "question", cascade = {PERSIST, REMOVE}, orphanRemoval = true)
-    private List<Answer> answers = new ArrayList<>();
+    @OrderBy("id DESC")
+    private List<Answer> answers = new LinkedList<>();
 
     public Answer writeAnswer(Member author, String content) {
         Answer answer = Answer
@@ -40,7 +39,7 @@ public class Question extends BaseEntity {
                 .content(content)
                 .build();
 
-        answers.add(answer);
+        answers.add(0, answer);
 
         return answer;
     }
