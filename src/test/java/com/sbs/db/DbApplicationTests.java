@@ -19,8 +19,6 @@ class DbApplicationTests {
 	void t1() {
 		List<Question> questions = questionService.findAll();
 
-		System.out.println(questions);
-
 		for (Question question : questions) {
 			String username = question.getAuthor().getUsername();
 			int size = question.getAnswers().size();
