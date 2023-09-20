@@ -3,10 +3,7 @@ package com.sbs.db.domain.question.entity;
 import com.sbs.db.base.jpa.BaseEntity;
 import com.sbs.db.domain.member.entity.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.LinkedList;
@@ -20,12 +17,14 @@ import static jakarta.persistence.FetchType.LAZY;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Question extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Member author;
     private String subject;
     @Column(columnDefinition = "TEXT")
     private String content;
+    @ToString.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "question", cascade = {PERSIST, REMOVE}, orphanRemoval = true)
     @OrderBy("id DESC")

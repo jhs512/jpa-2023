@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @SpringBootTest
 class DbApplicationTests {
 	@Autowired
@@ -15,7 +17,13 @@ class DbApplicationTests {
 	@Test
 	@Transactional
 	void t1() {
-		Question question1 = questionService.findById(1L).get();
-		System.out.println(question1.getAnswers());
+		List<Question> questions = questionService.findAll();
+
+		System.out.println(questions);
+
+		for (Question question : questions) {
+			String username = question.getAuthor().getUsername();
+			int size = question.getAnswers().size();
+		}
 	}
 }
