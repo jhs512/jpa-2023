@@ -16,13 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Question extends BaseEntity {
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Member author;
     private String subject;
     @Column(columnDefinition = "TEXT")

@@ -11,14 +11,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 @Entity
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Answer extends BaseEntity {
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Member author;
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Question question;
     @Column(columnDefinition = "TEXT")
     @Setter
