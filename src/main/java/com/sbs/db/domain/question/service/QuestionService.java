@@ -54,7 +54,7 @@ public class QuestionService {
             default -> sorts.add(Sort.Order.desc("id")); // 최신순
         }
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
+        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
 
         if (kw == null || kw.length() == 0) {
             return questionRepository.findAll(pageable);
@@ -67,5 +67,23 @@ public class QuestionService {
         // Answers_contentContains : 답변 내용
         // Answers_author_username : 답변 작성자 아이디
         return questionRepository.findDistinctBySubjectContainsOrContentContainsOrAuthor_usernameContainsOrAnswers_contentContainsOrAnswers_author_usernameContains(kw, kw, kw, kw, kw, pageable);
+    }
+
+    public Page<Question> searchV2(String kw, int page, String sortCode) {
+        kw = kw.trim();
+        List<Sort.Order> sorts = new ArrayList<>();
+
+        switch (sortCode) {
+            case "OLD" -> sorts.add(Sort.Order.asc("id")); // 오래된순
+            default -> sorts.add(Sort.Order.desc("id")); // 최신순
+        }
+
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
+
+        if (kw == null || kw.length() == 0) {
+            return questionRepository.findAll(pageable);
+        }
+
+        return questionRepository.findByKwV2(kw, pageable);
     }
 }
