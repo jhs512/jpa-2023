@@ -62,6 +62,13 @@ class DbApplicationTests {
     @DisplayName("질문 제목 + 질문 내용 + 답변 내용 + 질문자 아이디 + 답변자 아이디")
     @Transactional
     void t4() {
-        Page<Question> questionPage = questionService.searchV3("제목", 1, "NEW");
+        Page<Question> questionPage = questionService.searchV3("제목", 1, "OLD");
+    }
+
+    @Test
+    @DisplayName("옵션선택가능")
+    @Transactional
+    void t5() {
+        Page<Question> questionPage = questionService.searchV4(List.of("subject", "content", "questionAuthorUsername"), "제목", 1, "NEW");
     }
 }

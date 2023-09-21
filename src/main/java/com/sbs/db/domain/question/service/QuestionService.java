@@ -104,4 +104,22 @@ public class QuestionService {
 
         return questionRepository.findByKwV3(kw, pageable);
     }
+
+    public Page<Question> searchV4(List<String> optionCodes, String kw, int page, String sortCode) {
+        kw = kw.trim();
+        List<Sort.Order> sorts = new ArrayList<>();
+
+        switch (sortCode) {
+            case "OLD" -> sorts.add(Sort.Order.asc("id")); // 오래된순
+            default -> sorts.add(Sort.Order.desc("id")); // 최신순
+        }
+
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
+
+        if (kw == null || kw.length() == 0) {
+            return questionRepository.findAll(pageable);
+        }
+
+        return questionRepository.findByKwV4(optionCodes, kw, pageable);
+    }
 }
