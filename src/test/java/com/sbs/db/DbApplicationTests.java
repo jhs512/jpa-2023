@@ -57,4 +57,11 @@ class DbApplicationTests {
             System.out.println("size = " + size);
         }
     }
+
+    @Test
+    @DisplayName("질문 제목 + 질문 내용 + 답변 내용 + 질문자 아이디 + 답변자 아이디")
+    @Transactional
+    void t4() {
+        Page<Question> questionPage = questionService.searchV3("제목", 1, "NEW");
+    }
 }
